@@ -52,9 +52,9 @@ export async function POST(request: Request) {
     await writeBirds(birds);
 
     return NextResponse.json({ success: true, bird: newBird });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { success: false, message: "Gagal menambahkan burung." },
+      { success: false, message: `Gagal menambahkan burung: ${error.message || error}` },
       { status: 500 }
     );
   }

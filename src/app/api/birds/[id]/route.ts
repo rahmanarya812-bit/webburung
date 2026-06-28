@@ -31,9 +31,9 @@ export async function DELETE(
 
     await writeBirds(updatedBirds);
     return NextResponse.json({ success: true, message: "Burung berhasil dihapus." });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { success: false, message: "Gagal menghapus burung." },
+      { success: false, message: `Gagal menghapus burung: ${error.message || error}` },
       { status: 500 }
     );
   }
