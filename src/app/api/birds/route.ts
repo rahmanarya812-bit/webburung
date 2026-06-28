@@ -1,24 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import fs from "fs/promises";
-import path from "path";
-
-const getFilePath = () => path.join(process.cwd(), "src/data/birds.json");
-
-async function readBirds() {
-  const filePath = getFilePath();
-  try {
-    const data = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-async function writeBirds(birds: any[]) {
-  const filePath = getFilePath();
-  await fs.writeFile(filePath, JSON.stringify(birds, null, 2), "utf-8");
-}
+import { readBirds, writeBirds } from "@/lib/db";
 
 export async function GET() {
   try {
